@@ -1,7 +1,8 @@
 {
   "scripts": {
     "start": "rm -rf .parcel-cache && parcel serve src/index.html --dist-dir ./dist",
-    "build": "rm -rf .parcel-cache ./dist && parcel build src/index.html --dist-dir ./dist"
+    "build": "rm -rf .parcel-cache ./dist && parcel build src/index.html --dist-dir ./dist",
+    "gh": "yarn build && cd ./dist && git init && git add -A && git commit -m 'deploy' && git push -f git@github.com:lukaw3d/oasis-csv-report.git master:gh-pages && cd -"
   },
   "targets": {
     "default": {

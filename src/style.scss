@@ -12,6 +12,15 @@ $mui-btn-height: 50px;
 
 @import '../node_modules/muicss/lib/sass/mui';
 
+.mui-textfield--float-label {
+  > input,
+  > textarea {
+    &:required:valid {
+      @extend .mui--is-not-empty;
+    }
+  }
+}
+
 .mui-btn {
   font-weight: bold;
   width: 100%;

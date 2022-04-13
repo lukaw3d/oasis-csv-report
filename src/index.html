@@ -15,8 +15,9 @@
         <div class="card-content">
           <h1 class="title">Get report for oasis1 account</h1>
           <form id="request-form" action="/javascript-disabled" method="POST">
-            <div class="mui-textfield">
-              <input id="account" type="text" name="account" required="required" placeholder="oasis1 address here">
+            <div class="mui-textfield mui-textfield--float-label">
+              <input id="account" type="text" name="account" required="required">
+              <label for="account">oasis1 address here</label>
             </div>
             <button class="mui-btn mui-btn--primary" id="download" type="submit">
               Download CSV files

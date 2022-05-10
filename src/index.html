@@ -10,27 +10,30 @@
   <body class="page">
 
     <main class="align-card">
-      <section class="mui-panel card">
-        <div class="card-image" role="img" aria-label="Oasis Foundation logo"></div>
-        <div class="card-content">
-          <h1 class="title">Get report for oasis1 account</h1>
-          <form id="request-form" action="/javascript-disabled" method="POST">
-            <div class="mui-textfield mui-textfield--float-label">
-              <input id="account" type="text" name="account" required="required">
-              <label for="account">oasis1 address here</label>
-            </div>
-            <button class="mui-btn mui-btn--primary" id="download" type="submit">
-              Download CSV files
-            </button>
-            <p class="mui--text-danger" id="error-display-text"></p>
+      <div>
+        <section class="mui-panel card">
+          <div class="card-image" role="img" aria-label="Oasis Foundation logo"></div>
+          <div class="card-content">
+            <h1 class="title">Get report for oasis1 account</h1>
+            <form id="request-form" action="/javascript-disabled" method="POST">
+              <div class="mui-textfield mui-textfield--float-label">
+                <input id="account" type="text" name="account" required="required">
+                <label for="account">oasis1 address here</label>
+              </div>
+              <button class="mui-btn mui-btn--primary" id="download" type="submit">
+                Download CSV files
+              </button>
+              <p class="mui--text-danger" id="error-display-text"></p>
 
-            <p class="mui--text-dark-secondary">
-              Uses API from <a href="https://oasismonitor.com/">https://oasismonitor.com/</a>
-              to get 10000 transactions and staking rewards.
-            </p>
-          </form>
-        </div>
-      </section>
+              <p class="mui--text-dark-secondary">
+                Uses API from <a href="https://oasismonitor.com/">https://oasismonitor.com/</a>
+                to get 10000 transactions and staking rewards.
+              </p>
+            </form>
+          </div>
+        </section>
+        <a href="https://github.com/lukaw3d/oasis-csv-report">GitHub Source</a>
+      </div>
     </main>
 
     <script type="module" src="./index.ts"></script>

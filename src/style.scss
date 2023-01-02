@@ -75,3 +75,11 @@ body {
   color: $oasis-primary;
   font-weight: bold;
 }
+
+.alert-danger {
+  @extend .mui--bg-danger;
+  @extend .mui--text-light;
+  padding: 10px;
+  margin-left: -35px;
+  margin-right: -35px;
+}

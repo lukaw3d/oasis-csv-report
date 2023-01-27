@@ -31,7 +31,7 @@ function mapMaybe<T, R>(value: T | undefined, mapper: (value: T) => R) {
 async function downloadCsv() {
   try {
     const address = window.account.value
-    const txsRaw: Record<string, any>[] = await (await fetch(`https://api.oasismonitor.com/data/transactions?limit=10000&offset=0&account_id=${encodeURIComponent(address)}`)).json()
+    const txsRaw: Record<string, any>[] = await (await fetch(`https://api.oasismonitor.com/data/transactions?limit=20000&offset=0&account_id=${encodeURIComponent(address)}`)).json()
     const txs = txsRaw.map((tx) => {
       return {
         timestamp_iso: mapMaybe(tx.timestamp, v => new Date(v * 1000).toISOString()),
@@ -43,7 +43,7 @@ async function downloadCsv() {
     })
     downloadFile('transactions.csv', toCsv(txs))
 
-    const rewardsRaw: Record<string, any>[] = await (await fetch(`https://api.oasismonitor.com/data/accounts/${encodeURIComponent(address)}/rewards?limit=10000&offset=0`)).json()
+    const rewardsRaw: Record<string, any>[] = await (await fetch(`https://api.oasismonitor.com/data/accounts/${encodeURIComponent(address)}/rewards?limit=20000&offset=0`)).json()
     const rewards = rewardsRaw.map((reward) => {
       return {
         created_at_iso: mapMaybe(reward.created_at, v => new Date(v * 1000).toISOString()),

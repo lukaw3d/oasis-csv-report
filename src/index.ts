@@ -1,5 +1,4 @@
 import { unparse } from 'papaparse'
-import { utils } from 'ethers'
 
 function showError(status: string) {
   document.querySelector('#error-display-text').textContent = status;
@@ -28,6 +27,14 @@ function mapMaybe<T, R>(value: T | undefined, mapper: (value: T) => R) {
   return mapper(value)
 }
 
+// import { formatUnits } from 'ethers/lib/utils'
+function formatUnits(stringifiedBigInt: string, decimalPlaces: number) {
+  const value = BigInt(stringifiedBigInt)
+  const integer = (value / 10n**BigInt(decimalPlaces)).toString()
+  const fraction = (value % 10n**BigInt(decimalPlaces)).toString().padStart(9, '0').replace(/0+$/, '')
+  return `${integer}.${fraction}`.replace(/\.$/, '.0')
+}
+
 async function downloadCsv() {
   try {
     const address = window.account.value
@@ -35,9 +42,9 @@ async function downloadCsv() {
     const txs = txsRaw.map((tx) => {
       return {
         timestamp_iso: mapMaybe(tx.timestamp, v => new Date(v * 1000).toISOString()),
-        amount_rose: mapMaybe(tx.amount, v => utils.formatUnits(v, 9)),
-        escrow_amount_rose: mapMaybe(tx.escrow_amount, v => utils.formatUnits(v, 9)),
-        reclaim_escrow_amount_rose: mapMaybe(tx.reclaim_escrow_amount, v => utils.formatUnits(v, 9)),
+        amount_rose: mapMaybe(tx.amount, v => formatUnits(v, 9)),
+        escrow_amount_rose: mapMaybe(tx.escrow_amount, v => formatUnits(v, 9)),
+        reclaim_escrow_amount_rose: mapMaybe(tx.reclaim_escrow_amount, v => formatUnits(v, 9)),
         ...tx,
       }
     })
@@ -47,7 +54,7 @@ async function downloadCsv() {
     const rewards = rewardsRaw.map((reward) => {
       return {
         created_at_iso: mapMaybe(reward.created_at, v => new Date(v * 1000).toISOString()),
-        amount_rose: mapMaybe(reward.amount, v => utils.formatUnits(v, 9)),
+        amount_rose: mapMaybe(reward.amount, v => formatUnits(v, 9)),
         ...reward,
       }
     })

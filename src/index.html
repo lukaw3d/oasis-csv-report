@@ -15,26 +15,29 @@
           <div class="card-image" role="img" aria-label="Oasis Foundation logo"></div>
           <div class="card-content">
             <h1 class="title">Get report for oasis1 account</h1>
-            <form id="request-form" action="/javascript-disabled" method="POST">
-              <div class="mui-textfield mui-textfield--float-label">
-                <input id="account" type="text" name="account" required="required">
-                <label for="account">oasis1 address here</label>
-              </div>
-              <p class="alert-danger" role="alert">
-                On 2022-12-27 I noticed oasismonitor API is missing transactions and blocks
-                (<a href="https://oasismonitor.com/block/6789588">6789588</a>..<a href="https://oasismonitor.com/block/6806259">6806259</a>)
-                dated around 2022-01-13. All exported CSV files may contain incorrect information.
-              </p>
-              <button class="mui-btn mui-btn--primary" id="download" type="submit">
-                Download CSV files
-              </button>
-              <p class="mui--text-danger" id="error-display-text"></p>
 
-              <p class="mui--text-dark-secondary">
-                Uses API from <a href="https://oasismonitor.com/">https://oasismonitor.com/</a>
-                to get 20000 transactions and staking rewards.
-              </p>
-            </form>
+            <div class="mui-textfield mui-textfield--float-label">
+              <input id="account" type="text" name="account" required="required">
+              <label for="account">oasis1 address here</label>
+            </div>
+            <p class="alert-danger" role="alert">
+              On 2022-12-27 I noticed oasismonitor API is missing transactions and blocks
+              (<a href="https://oasismonitor.com/block/6789588">6789588</a>..<a href="https://oasismonitor.com/block/6806259">6806259</a>)
+              dated around 2022-01-13. All exported CSV files may contain incorrect information.
+            </p>
+            <button class="mui-btn mui-btn--primary" id="download-transactions" type="button">
+              Download transactions
+            </button>
+            <br />
+            <button class="mui-btn mui-btn--primary" id="download-staking-rewards" type="button">
+              Download staking rewards
+            </button>
+            <p class="mui--text-danger" id="error-display-text"></p>
+
+            <p class="mui--text-dark-secondary">
+              Uses API from <a href="https://oasismonitor.com/">https://oasismonitor.com/</a>
+              to get 20000 transactions and staking rewards.
+            </p>
           </div>
         </section>
         <a href="https://github.com/lukaw3d/oasis-csv-report">GitHub Source</a>

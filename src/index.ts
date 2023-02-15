@@ -1,7 +1,7 @@
 import { unparse } from 'papaparse'
 
 function showError(status: string) {
-  document.querySelector('#error-display-text').textContent = status;
+  document.querySelector('#error-display-text')!.textContent = status;
 }
 
 function downloadFile(filename: string, content: string) {
@@ -19,7 +19,7 @@ function toCsv(objects: Record<string, any>[]) {
   const allHeaders = new Set<string>()
   objects.forEach((obj) => Object.keys(obj).forEach(k => allHeaders.add(k)))
 
-  return unparse(objects, {header: true, columns: [...allHeaders]})
+  return unparse(objects, {header: true, columns: allHeaders.size > 0 ? [...allHeaders] : ['empty']})
 }
 
 function mapMaybe<T, R>(value: T | undefined, mapper: (value: T) => R) {
@@ -35,7 +35,7 @@ function formatUnits(stringifiedBigInt: string, decimalPlaces: number) {
   return `${integer}.${fraction}`.replace(/\.$/, '.0')
 }
 
-async function downloadCsv() {
+document.querySelector('#download-transactions')!.addEventListener('click', async () => {
   try {
     const address = window.account.value
     const txsRaw: Record<string, any>[] = await (await fetch(`https://api.oasismonitor.com/data/transactions?limit=20000&offset=0&account_id=${encodeURIComponent(address)}`)).json()
@@ -49,7 +49,13 @@ async function downloadCsv() {
       }
     })
     downloadFile('transactions.csv', toCsv(txs))
-
+  } catch (error) {
+    showError(error)
+  }
+})
+document.querySelector('#download-staking-rewards')!.addEventListener('click', async () => {
+  try {
+    const address = window.account.value
     const rewardsRaw: Record<string, any>[] = await (await fetch(`https://api.oasismonitor.com/data/accounts/${encodeURIComponent(address)}/rewards?limit=20000&offset=0`)).json()
     const rewards = rewardsRaw.map((reward) => {
       return {
@@ -62,8 +68,4 @@ async function downloadCsv() {
   } catch (error) {
     showError(error)
   }
-}
-document.querySelector('#request-form').addEventListener('submit', (event) => {
-  event.preventDefault()
-  downloadCsv()
 })
